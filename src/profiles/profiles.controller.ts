@@ -1,5 +1,17 @@
-import { Controller, Get, Query, Param, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { CreateProfileDto } from './dto/create-profile.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 
 //decorator higher order function
 @Controller('profiles')
@@ -21,6 +33,13 @@ export class ProfilesController {
     return {
       name: CreateProfileDto.name,
       description: CreateProfileDto.description,
+    };
+  }
+  @Put()
+  update(@Param('id') id: string, @Body() UpdateProfileDto: UpdateProfileDto) {
+    return {
+      id,
+      ...UpdateProfileDto,
     };
   }
 }
